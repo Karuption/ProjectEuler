@@ -2,10 +2,13 @@
 
 public static class Lib
 {
-    public static bool CheckPalindrome(long input)
-    {
-        string reversed = new string(input.ToString().Reverse().ToArray());
-        return input.ToString().Equals(reversed);
+    public static bool CheckPalindrome(long input) {
+        var number = input.ToString();
+
+        for (var i = 0; i < number.Length / 2; i++)
+            if (number[i] != number[number.Length - i - 1])
+                return false;
+        return true;
     }
 
     public static long FindXDigitPalindrome(int length)
@@ -40,12 +43,8 @@ public static class Lib
     {
         if(length < 1)
             throw new ArgumentOutOfRangeException(nameof(length), "The Number of digits has to be greater than 0");
-        int initial = 10;
 
-        while (--length > 0)
-            initial *= 10;
-
-        return initial-1;
+        return (int)Math.Pow(10, length) - 1;
     }
 
     public static int GetSmallestPalindromeByDigit(int baseSize)
@@ -53,14 +52,8 @@ public static class Lib
         if(baseSize < 1)
             throw new ArgumentOutOfRangeException(nameof(baseSize));
 
-        String digitS = "1";
-        int strlen = baseSize * 2 - 2;
+        var strlen = baseSize * 2 - 2;
 
-        while (strlen-- > 0)
-            digitS = String.Concat(digitS, "0");
-
-        digitS = String.Concat(digitS, "1");
-
-        return Int32.Parse(digitS);
+        return int.Parse(string.Join("", "1", new string('0', strlen), "1"));
     }
 }

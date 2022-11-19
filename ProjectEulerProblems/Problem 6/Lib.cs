@@ -1,35 +1,30 @@
-﻿namespace ProjectEulerProblems.Problem_6; 
+﻿namespace ProjectEulerProblems.Problem_6;
 
-public static class Lib
-{
-    public static long SumSquareDifference(long input)
-    {
-        List<long> squares = new List<long>();
-        List<long> sumSquares;
+public static class Lib {
+    public static long SumSquareDifference(long input) {
+        List<long> squares = new();
 
-        for (int i = 1; i <= input; i++)
+        for (var i = 1; i <= input; i++)
             squares.Add(i);
 
-        sumSquares = squares;
-        //end variable initialization
-
-        return getSquareOfSum(squares) - getSumOfSquares(sumSquares);
+        return getSquareOfSum(squares) - getSumOfSquares(squares);
     }
 
-    public static long getSumOfSquares(IEnumerable<long> squares)
-    {
+    public static long getSumOfSquares(List<long> squares) {
         long temp = 0;
+
         foreach (var square in squares)
-        {
             temp += square * square;
-        }
 
         return temp;
     }
 
-    public static long getSquareOfSum(IEnumerable<long> sumsq)
-    {
-        long temp = sumsq.Sum();
-        return temp*temp;
+    public static long getSquareOfSum(List<long> sumsq) {
+        long temp = 0;
+
+        for (var i = 0; i < sumsq.Count(); i++)
+            temp += sumsq[i];
+
+        return temp * temp;
     }
 }

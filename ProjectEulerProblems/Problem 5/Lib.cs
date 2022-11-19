@@ -8,10 +8,8 @@ public static class Lib
             throw new ArgumentOutOfRangeException(nameof(input), "The range must be above 3");
         long temp = GetLCM(input, input - 1);
 
-        for (long i = input-2; i > 1; i--)
-        {
+        for (var i = input - 2; i > 1; i--)
             temp = GetLCM(temp, i);
-        }
 
         return temp;
     }
@@ -20,9 +18,16 @@ public static class Lib
         return (first * second) / GetGCD(first, second);
     }
 
-    public static long GetGCD(long first, long second)
-    {
-        var tmpx = Math.Max(first,second); var tmpy = Math.Min(first, second);
+    public static long GetGCD(long first, long second) {
+        long tmpx, tmpy;
+        if (first < second) {
+            tmpx = second;
+            tmpy = first;
+        }
+        else {
+            tmpx = first;
+            tmpy = second;
+        }
 
         while (tmpx != tmpy)
             if (tmpx > tmpy)

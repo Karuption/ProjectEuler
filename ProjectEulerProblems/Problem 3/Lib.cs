@@ -9,15 +9,11 @@ public static class Lib
         List<long> factors = new List<long>();
 
         while (input % 2 == 0)
-        {
-            input /= 2;
-            factors.Add(input);
-        }
+            factors.Add(input >>= 1);
 
-        for (long i = 3; i <= Math.Sqrt(input); i+=2)
-        {
-            while (input % i == 0)
-            {
+
+        for (long i = 3; i <= Math.Sqrt(input); i += 2) {
+            while (input % i == 0) {
                 factors.Add(i);
                 input /= i;
             }
